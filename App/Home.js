@@ -11,7 +11,7 @@ import {
 	ScrollView,
   PushNotificationIOS,
 	RefreshControl,
-	InteractionManager,
+	InteractionManager,     
 	Image
 } from 'react-native';
 import Toast from '@remobile/react-native-toast';
