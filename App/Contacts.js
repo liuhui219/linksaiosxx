@@ -516,6 +516,7 @@ export default class Contacts extends Component {
 				renderFooter={this.renderFooter}
 				renderSectionHeader={this.renderSectionHeader}
 				initialListSize={3}
+				automaticallyAdjustContentInsets={false}  
 				showsVerticalScrollIndicator={false}
 				pageSize={10}
 			  />
