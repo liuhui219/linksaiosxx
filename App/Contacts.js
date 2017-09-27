@@ -20,6 +20,7 @@ import {
 import Storage from 'react-native-storage';
 import ContactInfo from './ContactInfo';
 import Netinfo from './Netinfo';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SearchBar from 'react-native-search-bar';
 let window = {
@@ -86,7 +87,7 @@ export default class Contacts extends Component {
 		  backc:'#4385f4',
 		  status:false,
 		  arrays:[],
-		  fadeAnim:new Animated.Value(65),
+		  fadeAnim:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? new Animated.Value(75) : new Animated.Value(65),
 		  pt:new Animated.Value(0),
 		  datas:{},
 		  showsCancelButton:false,
@@ -281,7 +282,7 @@ export default class Contacts extends Component {
 	}
 
     moveScroll(e){
-        let num = Math.floor((e.nativeEvent.pageY - 89 - Math.floor((Dimensions.get('window').height-540)/2)) / 14);
+        let num = (DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? Math.floor((e.nativeEvent.pageY - 119 - Math.floor((Dimensions.get('window').height-540)/2)) / 14) : Math.floor((e.nativeEvent.pageY - 109 - Math.floor((Dimensions.get('window').height-540)/2)) / 14);
 		console.log(num)
         if(num<1){
 			num = 1;
@@ -310,7 +311,7 @@ export default class Contacts extends Component {
     renderLoadingView() {
 		return (
 		 <View style={{flex:1}}>
-		 <View style={{height:20,backgroundColor:'#4385f4',}}></View>
+		 <View style={{height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,backgroundColor:'#4385f4',}}></View>
 		    <View  style={styles.card}>
 			  <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
 					<View style={{justifyContent:'center',flexDirection:'row',alignItems:'center'}}>
@@ -343,7 +344,7 @@ export default class Contacts extends Component {
     	Animated.timing(
 				this.state.pt,
 				{
-				  toValue: 20,
+				  toValue: (DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 				  duration: 200,
 				},
 
@@ -357,7 +358,7 @@ export default class Contacts extends Component {
     	Animated.timing(
 				this.state.fadeAnim,
 				{
-				  toValue: 65,
+				  toValue: (DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 				  duration: 200,
 				},
 
@@ -453,7 +454,7 @@ export default class Contacts extends Component {
 		}else if(this.state.sx){
 			return(
 			<View style={{flex:1}}>
-			<View style={{height:20,backgroundColor:'#4385f4',}}></View>
+			<View style={{height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,backgroundColor:'#4385f4',}}></View>
 			  <View style={styles.card}>
 			  <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
 					<View style={{justifyContent:'center',flexDirection:'row',alignItems:'center'}}>
@@ -474,7 +475,7 @@ export default class Contacts extends Component {
 		return(
 		<View style={{flex:1}}>
 		 <Animated.View style={{height: this.state.fadeAnim,backgroundColor:'#4385f4',flexDirection:'row',}}>
-			  <View style={{flex:1,alignItems:'center',justifyContent:'center',paddingTop:20,}}>
+			  <View style={{flex:1,alignItems:'center',justifyContent:'center',paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,}}>
 					<View style={{justifyContent:'center',flexDirection:'row',alignItems:'center'}}>
 								<Text style={{color:'white',fontSize:16}} allowFontScaling={false}>通讯录</Text>
 					</View>
@@ -516,7 +517,7 @@ export default class Contacts extends Component {
 				renderFooter={this.renderFooter}
 				renderSectionHeader={this.renderSectionHeader}
 				initialListSize={3}
-				automaticallyAdjustContentInsets={false}  
+				automaticallyAdjustContentInsets={false}
 				showsVerticalScrollIndicator={false}
 				pageSize={10}
 			  />

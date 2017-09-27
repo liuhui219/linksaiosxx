@@ -18,7 +18,7 @@ import PassState from './PassState';
 import Push from './Push';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Token from './Token';
-
+import DeviceInfo from 'react-native-device-info';
 var dataImpor = [];
 export default class Info extends Component {
 

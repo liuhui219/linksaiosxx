@@ -30,6 +30,7 @@ import CheckBox from 'react-native-check-box';
 import Picker from 'react-native-picker';
 import ImagePicker from 'react-native-image-picker';
 import Toast from '@remobile/react-native-toast';
+import DeviceInfo from 'react-native-device-info';
 import AllCustomer from './AllCustomer';
 import AllCustomer1 from './AllCustomer1';
 import AllCustomer2 from './AllCustomer2';
@@ -1097,8 +1098,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

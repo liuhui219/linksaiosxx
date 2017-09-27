@@ -21,6 +21,7 @@ import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-v
 import Token from './Token';
 import Newsa from './Newsa';
 import Newsb from './Newsb';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 let array = []
 let aa=[];
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
 card: {
-        paddingTop:20,
-        height:65,
+        paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
+        height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
         backgroundColor:'#4385f4',
         flexDirection:'row'
     },

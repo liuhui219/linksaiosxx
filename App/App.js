@@ -10,7 +10,7 @@ import { createStore } from 'redux';
 import { Root } from './root';
 const store = createStore(rootReducer);
 export default class App extends Component {
-    render() {
+    render() {  
         return (
             <Provider store = {store}>
                 <Root />

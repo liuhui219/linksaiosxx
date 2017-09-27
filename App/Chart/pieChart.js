@@ -41,6 +41,7 @@ export default class PieChartScreen extends React.Component {
 	BackAndroid.addEventListener('hardwareBackPress', this._pressButton);
     this.state = {
       domain:'',
+      mtoken:'',
 	  values:[],
 	  arrX:[],
       uid:'',
@@ -110,7 +111,7 @@ export default class PieChartScreen extends React.Component {
   }
 
     componentDidMount() {
-		this.setState({domain:data.data.domain.slice(0,-6),uid:data.data.uid})
+		this.setState({domain:data.data.domain.slice(0,-6),uid:data.data.uid,mtoken:data.data.mtoken})
         this.timer = setTimeout(() => {this.getData();},800);
 
     }
@@ -126,14 +127,14 @@ export default class PieChartScreen extends React.Component {
 	var names = [];
 	var ar = [];
 
-    fetch('' + this.state.domain + 'app00aee5aa1cc1bf0ecd5d41/dashboard/getBoard2DataService.do?id='+this.props.data.id+'&userId='+this.state.uid+'&access_token=32886e81a349f1ef')
+    fetch('' + this.state.domain + 'app00aee5aa1cc1bf0ecd5d41/dashboard/getBoard2DataService.do?id='+this.props.data.id+'&userId='+this.state.uid+'&access_token=32886e81a349f1ef&mtoken=' + this.state.mtoken + '')
 		  .then((response) => response.json())
 		  .then((responseData) => {
 		       data = JSON.parse(responseData.data);
 		       cons = JSON.parse(responseData.boardInfo);
 			   console.log(data)
 			   cons.layout.rows.forEach((info,i)=>{
-				   if(info.type){
+				   if(info.type == 'widget'){
 					   data.data[0].forEach((ds,j)=>{
 					     info.widgets[0].widget.data.config.keys.forEach((ke,v)=>{
 							 if(ds == ke.col){

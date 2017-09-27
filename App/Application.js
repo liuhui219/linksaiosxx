@@ -35,6 +35,7 @@ import Chart from './Chart/chart';
 import cameraCard from './cameraCard';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Spinner from 'react-native-spinkit';
+import DeviceInfo from 'react-native-device-info';
 export default class Application extends Component {
 	constructor(props) {
         super(props);
@@ -351,16 +352,7 @@ export default class Application extends Component {
 					   </Text>
 					  </View>
 					</TouchableHighlight>
-          <TouchableHighlight  activeOpacity = {0.8} underlayColor="rgba(153, 153, 159, 0.29)" onPress={this._all.bind(this,Chart)}  style={{alignItems:'center', justifyContent:'center',width:Dimensions.get('window').width/4,height:Dimensions.get('window').width/4,}}>
-					  <View style={{alignItems:'center', justifyContent:'center',width:Dimensions.get('window').width/4,height:Dimensions.get('window').width/4,borderRightWidth:1,borderBottomWidth:1,borderColor:'#eee',}}>
-					   <View style={{width: 35, height: 35,borderRadius:5,backgroundColor:'#6b9f3d',alignItems:'center', justifyContent:'center'}}>
-					      <Image source={require('./imgs/chart.png')} style={{width: 26, height: 26,}} />
-					   </View>
-					   <Text style={{marginTop:8,fontSize:12}}allowFontScaling={false}>
-					      报表
-					   </Text>
-					  </View>
-					</TouchableHighlight>
+
 
 
 
@@ -393,7 +385,23 @@ export default class Application extends Component {
                 </Text>
                </View>
              </TouchableHighlight>
-           }else{
+           }
+           if(data.iosurl == 'https://www.baobiao.com'){
+             return <TouchableHighlight key={i}
+              style={{alignItems:'center', justifyContent:'center',width:Dimensions.get('window').width/4,height:Dimensions.get('window').width/4,}}
+              onLongPress={this._long.bind(this,data)}
+                activeOpacity = {0.8} underlayColor="rgba(153, 153, 159, 0.29)"
+              onPress={this._all.bind(this,Chart)}>
+              <View style={{alignItems:'center', justifyContent:'center',width:Dimensions.get('window').width/4,height:Dimensions.get('window').width/4,borderRightWidth:1,borderBottomWidth:1,borderColor:'#eee',}}>
+               <View style={{width: 35, height: 35,borderRadius:7,overflow:'hidden',backgroundColor:'#fff',alignItems:'center', justifyContent:'center'}}>
+                  <Image source={{uri:data.appicon}} style={{width: 35, height: 35,borderRadius:7,}} />
+               </View>
+               <Text style={{marginTop:8,fontSize:12}}allowFontScaling={false}>
+                 {data.appname}
+               </Text>
+              </View>
+            </TouchableHighlight>
+          }
             return <TouchableHighlight key={i}
 						style={{alignItems:'center', justifyContent:'center',width:Dimensions.get('window').width/4,height:Dimensions.get('window').width/4,}}
 						onLongPress={this._long.bind(this,data)}
@@ -408,7 +416,7 @@ export default class Application extends Component {
 					   </Text>
 					  </View>
 					</TouchableHighlight>
-           }
+
 					}) : <View style={{flexDirection:'row',flex:1,height:150,alignItems:'center',justifyContent:'center',}}>
 
 								 <Text style={{fontSize:20,color:'#ccc',}}allowFontScaling={false}>暂无应用</Text>
@@ -457,8 +465,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    paddingTop:20,
-    height:65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

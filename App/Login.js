@@ -12,12 +12,13 @@ import {
 	ActivityIndicator,
 	InteractionManager,
 	Animated,
+  Platform,
 	Dimensions,
 	BackAndroid,
 	AsyncStorage,
 	Image
 } from 'react-native';
-
+import DeviceInfo from 'react-native-device-info';
 import Token from './Token';
 
 var dataImpor = [];
@@ -53,7 +54,6 @@ export class Login extends Component {
     }
 
 	componentDidMount() {
-
     PushNotificationIOS.addEventListener('register', this._registNotification.bind(this));
     PushNotificationIOS.requestPermissions();
         storage.save({
@@ -223,7 +223,7 @@ export class Login extends Component {
     return (
 
 	         <View style={{flex:1}}>
-			    <View style={{height:65,paddingTop:20,backgroundColor:'#4385f4',alignItems:'center', justifyContent:'center'}}>
+			    <View style={{height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,backgroundColor:'#4385f4',alignItems:'center', justifyContent:'center'}}>
 				  <Text style={{color:'#fff',fontSize:18}} allowFontScaling={false}>登录</Text>
 				</View>
 				<WebView style={{  flex:1,}}
@@ -265,8 +265,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

@@ -22,6 +22,7 @@ import About from './About';
 import welcomest from './welcomest';
 import ContactInfos from './ContactInfos';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 import Cache from './Cache';
 import set from './set';
 import Safe from './Safety/index';
@@ -439,12 +440,12 @@ export default class Setting extends Component {
 
 
               <Animated.View pointerEvents="none" style={[styles.titleContainer, {opacity: titleOpacity, transform: [{ translateY: titleTranslate }] }]}>
-                <View style={{flex:1,paddingTop:0,justifyContent:'center',alignItems:'flex-start',}}>
+                <View style={{flex:1,paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 10 : 0,justifyContent:'center',alignItems:'flex-start',}}>
                     <View style={{marginLeft:25,width: 30, height: 30,borderRadius:15,overflow:'hidden',borderWidth:1,borderColor:'#fff'}}>
                       <Image source={this.state.img} style={{width: 30, height: 30,}} />
                     </View>
                 </View>
-                <View style={{flex:1}}>
+                <View style={{flex:1,paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 10 : 0,}}>
                 <Text style={styles.title} allowFontScaling={false}>
                   {data.data.name}
                 </Text>
@@ -464,7 +465,7 @@ export default class Setting extends Component {
 }
 
 const HEADER_HEIGHT = 170;
-const NAVBAR_HEIGHT = 65;
+const NAVBAR_HEIGHT = (DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65;
 
 const styles = StyleSheet.create({
   row: {

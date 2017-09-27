@@ -28,6 +28,7 @@ import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Gonggaob from './Gonggaob';
 import Swipeable from 'react-native-swipeable';
+import DeviceInfo from 'react-native-device-info';
 import Toast from '@remobile/react-native-toast';
 import CheckBox from 'react-native-check-box';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -1077,9 +1078,9 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
-	paddingTop:20,
+	paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	flexDirection:'row'
   },
   loading: {

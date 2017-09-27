@@ -30,6 +30,7 @@
     "react-native-lightbox": "^0.6.0",
     "react-native-modalbox": "^1.4.1",
     "react-native-picker": "^3.0.5",
+    "react-native-qrcode": "^0.2.6",
     "react-native-scrollable-tab-view": "^0.6.6",
     "react-native-search-bar": "^3.0.0",
     "react-native-share-extension": "^1.2.0",

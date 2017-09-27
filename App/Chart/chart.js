@@ -56,7 +56,7 @@ export default class Chart extends React.Component {
 	var arr = [];
 	var arrName=[];
 	var main = [];
-    fetch('' + this.state.domain + 'app00aee5aa1cc1bf0ecd5d41/dashboard/getBoardListService.do?userId='+data.data.uid+'&access_token=32886e81a349f1ef')
+    fetch('' + this.state.domain + 'app00aee5aa1cc1bf0ecd5d41/dashboard/getBoardListService.do?userId='+data.data.uid+'&access_token=32886e81a349f1ef&mtoken=' + data.data.mtoken + '')
 		  .then((response) => response.json())
 		  .then((responseData) => {
 		  console.log(responseData)
@@ -88,7 +88,7 @@ export default class Chart extends React.Component {
   }
 
   _shuax(){
-	  this.getSH();
+	  this.getData();
 	  this.setState({show:true,statua:false})
   }
 

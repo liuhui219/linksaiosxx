@@ -19,6 +19,7 @@ import PassState from './PassState';
 import Push from './Push';
 import Toast from '@remobile/react-native-toast';
 import Communications from 'react-native-communications';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Token from './Token';
 export default class CalendarInfo extends React.Component {
@@ -254,8 +255,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

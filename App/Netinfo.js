@@ -17,6 +17,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 import Netinfos from './Netinfos';
 
 export default class Netinfo extends React.Component {

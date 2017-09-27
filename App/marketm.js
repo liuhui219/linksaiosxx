@@ -18,6 +18,7 @@ import {
 	Dimensions,
 	Image
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import Push from './Push';
 import PassState from './PassState';
 import SelectPoeple from './SelectPoeple';
@@ -122,10 +123,10 @@ export default class Marketm extends Component {
 						  headers: {
 							'Content-Type': 'application/x-www-form-urlencoded',
 						  },
-						  body: that.toQueryString({
-							'app': 'Account',
-							'mm': 'Expense',
-							'aa':'auditqx',
+              body: that.toQueryString({
+							'app': result.flow.node.split(".")[0],
+							'mm': result.flow.node.split(".")[1],
+							'aa':result.flow.node.split(".")[2],
 							'con_id': that.props.data.con_id,
 							'current_step': result.flow ? result.flow.current_step : 0
 						  })
@@ -860,9 +861,9 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
-	paddingTop:20,
+	paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	flexDirection:'row'
   },
   default: {

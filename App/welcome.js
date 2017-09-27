@@ -9,6 +9,7 @@ import {
   Text,
   Dimensions
 } from 'react-native'
+import DeviceInfo from 'react-native-device-info';
 import Swiper from 'react-native-swiper';
 import {Login,data} from './Login';
 import Splash from './Splash';
@@ -34,23 +35,23 @@ const styles = {
 export default class Welcome extends Component {
 
 _Splash() {
-        var { navigator } = this.props; 
+        var { navigator } = this.props;
         if(navigator) {
-      
+
             navigator.resetTo({
                 name: 'Login',
                 component: Login,
-         
+
             })
-     
+
         }
     }
 
   render () {
     return (
       <View>
-        
-            
+
+
           <Swiper style={styles.wrapper}
             dot={<View style={{backgroundColor: 'rgba(0,0,0,.3)', width: 8, height: 8, borderRadius: 4, marginLeft: 7, marginRight: 7}} />}
             activeDot={<View style={{backgroundColor: '#666', width: 8, height: 8, borderRadius: 4, marginLeft: 7, marginRight: 7}} />}
@@ -75,7 +76,7 @@ _Splash() {
               </View>
             </View>
           </Swiper>
-        
+
       </View>
     )
   }

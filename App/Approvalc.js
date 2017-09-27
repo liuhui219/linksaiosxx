@@ -20,6 +20,7 @@ import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-v
 import Token from './Token';
 import Workflowa from './Workflowa';
 import Assetm from './Assetm';
+import DeviceInfo from 'react-native-device-info';
 import Bxma from './Bxma';
 import qus from './qus';
 import Attendancema from './Attendancema';

@@ -15,7 +15,7 @@ import {
 	RefreshControl,
 	ListView,
 } from 'react-native';
-
+import DeviceInfo from 'react-native-device-info';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';

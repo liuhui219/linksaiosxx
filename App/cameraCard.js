@@ -25,6 +25,7 @@ import Toast from '@remobile/react-native-toast';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 import Picker from 'react-native-picker';
 import Contacts  from 'react-native-contacts';
 var array = [];
@@ -813,8 +814,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#000',
 	flexDirection:'row'
   },

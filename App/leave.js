@@ -23,6 +23,7 @@ import {
 	ListView,
 } from 'react-native';
 import PassState from './PassState';
+import DeviceInfo from 'react-native-device-info';
 import Push from './Push';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
@@ -92,7 +93,7 @@ export default class leave extends React.Component {
     GetSh(){
       var that = this;
       aa = [];
-      fetch('' + this.state.domain + '/index.php?app=Account&m=ExpenseApi&a=select_auditlist&apps=Account&ms=Expense&as=auditqx&access_token=' + this.state.token + '', {
+      fetch('' + this.state.domain + '/index.php?app=Account&m=ExpenseApi&a=select_auditlist&access_token=' + this.state.token + '', {
        method: 'POST',
        headers: {
        'Content-Type': 'application/x-www-form-urlencoded',
@@ -562,8 +563,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

@@ -20,6 +20,7 @@ import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-v
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Gonggaob from './Gonggaob';
+import DeviceInfo from 'react-native-device-info';
 
 var array = [];
 export default class AllCustomer extends React.Component {

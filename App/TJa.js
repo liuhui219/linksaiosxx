@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
 	StyleSheet,
-    Navigator, 
+    Navigator,
 	TouchableOpacity,
 	TouchableHighlight,
 	Text,
@@ -15,17 +15,17 @@ import {
 	RefreshControl,
 	ListView,
 } from 'react-native';
- 
+import DeviceInfo from 'react-native-device-info'; 
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
-import Icon from 'react-native-vector-icons/Ionicons'; 
-var array = []; 
+import Icon from 'react-native-vector-icons/Ionicons';
+var array = [];
 var aa=[];
 export default class Newsb extends React.Component {
-    
+
     constructor(props) {
-        super(props); 
-		this.state = { 
+        super(props);
+		this.state = {
 		  dataSource: new ListView.DataSource({
 			rowHasChanged: (row1, row2) => row1 !== row2,
 		  }),
@@ -39,18 +39,18 @@ export default class Newsb extends React.Component {
 		  isReach:false,
 		  isRefreshing:false,
 		  isNull:0,
-	  };   
+	  };
     }
- 
+
     componentDidMount() {
         //这里获取传递过来的参数: name
-		 array = []; 
+		 array = [];
          aa=[];
-		 
-	       this.fetchData('' + Token.window.url + '/index.php?app=Home&m=AuditApi&a=getAudit&uid=' + Token.window.uid + '&cid=' + Token.window.cid + '&access_token=' + Token.window.token + '&p='+this.state.p); 
-		 
+
+	       this.fetchData('' + Token.window.url + '/index.php?app=Home&m=AuditApi&a=getAudit&uid=' + Token.window.uid + '&cid=' + Token.window.cid + '&access_token=' + Token.window.token + '&p='+this.state.p);
+
     }
-	
+
 	toQueryString(obj) {
 		return obj ? Object.keys(obj).sort().map(function (key) {
 			var val = obj[key];
@@ -65,33 +65,33 @@ export default class Newsb extends React.Component {
 	}
 	fetchData(url) {
 		var that=this;
-		
+
 		fetch(url, {
 				  method: 'POST',
 				  headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
-				  },  
-				  body: this.toQueryString({ 
-					'type': 1, 
-					'status': -1, 
-					'perPage': 10, 			
+				  },
+				  body: this.toQueryString({
+					'type': 1,
+					'status': -1,
+					'perPage': 10,
 				  })
 				})
-				.then(function (response) {   
-                    return response.json();	
+				.then(function (response) {
+                    return response.json();
 				})
 				.then(function (result) {
 					 console.log(result)
 					  that.setState({
-						   isNull:result.count,  
+						   isNull:result.count,
 					  })
-					  if(result.data != null){ 
+					  if(result.data != null){
 					   result.data.forEach((Data,i) => {
 						   key={i}
 						   var IMG =  {uri: Token.window.url+Data.from_avatar.slice(1)}
 						   aa.push(IMG)
 						   array.push(Data);
-						   
+
 					   })
 					  }
 					  if(result.count == 0){
@@ -101,14 +101,14 @@ export default class Newsb extends React.Component {
 							   isLoadMore:false,
 						   })
 					  }else if(array.length > result.count){
-						   
+
 						   that.setState({
 							   isReach:true,
 							   isLoadMore:false,
-							   
+
 						   })
 					   }else{
-						   
+
 						   that.setState({
 							   datas:result.data,
 							   imgs: aa,
@@ -116,17 +116,17 @@ export default class Newsb extends React.Component {
 							   loaded: true,
 							   isLoadMore:false,
 						   })
-					   }			   
-					  
+					   }
+
 				})
-	
-	
+
+
 	}
-	   
-	 
-	 
-	
-	
+
+
+
+
+
     render() {
           if(!this.state.loaded){
 		  return (
@@ -141,35 +141,35 @@ export default class Newsb extends React.Component {
 		return(
 		 <ListView
 			dataSource={this.state.dataSource}
-			renderRow={this.renderMovie.bind(this)}  
-			onEndReached={this._onEndReach.bind(this) } 
+			renderRow={this.renderMovie.bind(this)}
+			onEndReached={this._onEndReach.bind(this) }
 			onEndReachedThreshold={2}
 			renderFooter={this._renderFooter.bind(this)}
 			refreshControl={
               <RefreshControl
                 refreshing={this.state.isRefreshing}
-                onRefresh={this._onRefresh.bind(this) } 
+                onRefresh={this._onRefresh.bind(this) }
                 colors={['#ff0000', '#00ff00', '#0000ff','#3ad564']}
 				progressBackgroundColor="#ffffff"
                 />
             }
 		  />
 		)
-	    
+
     }
-	
-	
+
+
 	 renderMovie(data,sectionID: number, rowID: number) {
-		
+
         if(this.state.isNull==0){
 			return (
 			    <View style={{justifyContent:'center',alignItems:'center',height:300,}}>
 				    <Icon name="ios-folder-outline" color="#ccc"size={70}  />
 				    <Text style={{fontSize:18,}} allowFontScaling={false}>{data}</Text>
 				</View>
-			)     
-		} 		
-		 
+			)
+		}
+
 		return (
 		    <View style={{paddingTop:15, justifyContent:'center',alignItems:'center',}}>
 			   <View style={{backgroundColor:'#ddd',paddingTop:3,paddingBottom:3,paddingLeft:8,paddingRight:8,borderRadius:3,}}>
@@ -187,11 +187,11 @@ export default class Newsb extends React.Component {
 					   </View>
 				  </View>
 			   </View>
-			</View>  
-			)	  
+			</View>
+			)
 	  }
-	
-	  _renderFooter() { 
+
+	  _renderFooter() {
 		 if(this.state.isLoadMore){
 			 return (
 				<View style={styles.footer}>
@@ -200,45 +200,45 @@ export default class Newsb extends React.Component {
 				</View>
 		  )
 		 }
-		  
-		 
+
+
 	  }
-	  
+
 	   // 下拉刷新
 	  _onRefresh() {
 		 this.setState({
-			   isRefreshing:true, 
-               p:1,			   
+			   isRefreshing:true,
+               p:1,
 		  })
-		  var that=this 
+		  var that=this
 				fetch('' + Token.window.url + '/index.php?app=Home&m=AuditApi&a=getAudit&uid=1&cid=1&access_token=' + Token.window.token + '&p=1', {
 						  method: 'POST',
 						  headers: {
 							'Content-Type': 'application/x-www-form-urlencoded',
-						  },  
-						  body: this.toQueryString({ 
-							'type': 1, 
-							'status': -1, 
-							'perPage': 10, 			
+						  },
+						  body: this.toQueryString({
+							'type': 1,
+							'status': -1,
+							'perPage': 10,
 						  })
 						})
-						.then(function (response) {   
-							return response.json();	
+						.then(function (response) {
+							return response.json();
 						})
 						.then(function (result) {
-							 
+
 							  array=[];
 							  array.length = 0
-							  if(result.data != null){ 
+							  if(result.data != null){
 								   result.data.forEach((Data,i) => {
 									   key={i}
 									   var IMG =  {uri: Token.window.url+Data.from_avatar.slice(1)}
 									   aa.push(IMG)
 									   array.push(Data);
-									   
+
 								   })
 								  }
-							  
+
 								  if(result.count == 0){
 								  that.setState({
 										   dataSource: that.state.dataSource.cloneWithRows(['暂无数据']),
@@ -257,41 +257,41 @@ export default class Newsb extends React.Component {
 										   isLoadMore:false,
 										   isRefreshing:false,
 									   })
-								   }			   
-							   console.log(result)			   
-							  
+								   }
+							   console.log(result)
+
 						})
-			
-			
-			 
-			 
-    	   
-		 
+
+
+
+
+
+
 	  }
-	  
-	  _onEndReach() {  
-		  
+
+	  _onEndReach() {
+
 		  if(!this.state.isReach){
 			  this.setState({
 				  isLoadMore:true,
 				  p:this.state.p+1,
 			  })
 			 InteractionManager.runAfterInteractions(() => {
-				   this.fetchData('' + Token.window.url + '/index.php?app=Home&m=AuditApi&a=getAudit&uid=1&cid=1&access_token=' + Token.window.token + '&p='+this.state.p); 
+				   this.fetchData('' + Token.window.url + '/index.php?app=Home&m=AuditApi&a=getAudit&uid=1&cid=1&access_token=' + Token.window.token + '&p='+this.state.p);
 			})
 		  }
-		  
-		  
+
+
 	  }
-	
+
 }
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   tabView: {
     flex: 1,
-    flexDirection: 'column', 
-	backgroundColor:'#fafafa', 
-  },   
-  card: { 
+    flexDirection: 'column',
+	backgroundColor:'#fafafa',
+  },
+  card: {
     height:45,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-       
+
     },
 
     loadingTitle: {
@@ -329,6 +329,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.55)',
     flex: 1,
     fontSize: 13,
-    
+
   },
 });

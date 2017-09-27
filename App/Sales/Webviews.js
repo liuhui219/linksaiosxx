@@ -18,6 +18,7 @@ import {
 	Image
 } from 'react-native';
 import PassState from '../PassState';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Netinfo from '../Netinfo';
 
@@ -84,7 +85,7 @@ export default class Webviews extends Component {
 	renderLoading(){
 		   return(
 		        <View style={{justifyContent: 'center',alignItems: 'center',height:Dimensions.get('window').height,width:Dimensions.get('window').width, position:'absolute',top:0,left:0,}}>
-				     <View style={{justifyContent:'center',position:'absolute',top:0,left:0,height:45,alignItems:'flex-start',width:Dimensions.get('window').width,paddingLeft:10,backgroundColor:'#4385f4'}}>
+				     <View style={{justifyContent:'center',position:'absolute',top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? -15 : 0,left:0,height:45,alignItems:'flex-start',width:Dimensions.get('window').width,paddingLeft:10,backgroundColor:'#4385f4'}}>
 						 <TouchableOpacity  onPress={this._pressButton.bind(this)}>
 							  <View style={{justifyContent:'flex-start',flexDirection:'row',alignItems:'center',backgroundColor:'transparent'}}>
 									<Icon name="ios-arrow-back" color="#fff"size={24}  />
@@ -113,7 +114,7 @@ export default class Webviews extends Component {
 				    <Text style={{fontSize:16,color:'#ccc'}} allowFontScaling={false}>点击屏幕，重新加载</Text>
 				</View>
 			  </TouchableOpacity>
-			  <View style={{justifyContent:'center',position:'absolute',top:0,left:0,height:45,alignItems:'flex-start',width:Dimensions.get('window').width,paddingLeft:10,backgroundColor:'#4385f4'}}>
+			  <View style={{justifyContent:'center',position:'absolute',top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? -15 : 0,left:0,height:45,alignItems:'flex-start',width:Dimensions.get('window').width,paddingLeft:10,backgroundColor:'#4385f4'}}>
 				 <TouchableOpacity  onPress={this._pressButton.bind(this)}>
 					  <View style={{justifyContent:'flex-start',flexDirection:'row',alignItems:'center',backgroundColor:'transparent'}}>
 							<Icon name="ios-arrow-back" color="#fff"size={24}  />
@@ -177,8 +178,8 @@ export default class Webviews extends Component {
     render() {
     return (
 	   <View style={{flex:1,flexDirection:'column',backgroundColor:'#fff'}}>
-	         <View style={{backgroundColor:'#4385f4',height:20,width:Dimensions.get('window').width}}></View>
-             <WebView style={{  flex:1,}}
+	         <View style={{backgroundColor:'#4385f4',height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 45 : 20,width:Dimensions.get('window').width}}></View>
+             <WebView style={{  flex:1,marginTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? -14 : 0}}
                   ref={WEBVIEW_REF}
 				  source={{uri:this.props.url}}
 				  startInLoadingState={true}
@@ -196,7 +197,7 @@ export default class Webviews extends Component {
 				  onMessage={this.onMessage.bind(this)}
 			  >
 			 </WebView>
-             {this.state.isfalse ? <View style={{justifyContent:'center',position:'absolute',top:20,left:0,height:45,alignItems:'flex-start',width:57,paddingLeft:10,}}>
+             {this.state.isfalse ? <View style={{justifyContent:'center',position:'absolute',top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,left:0,height:45,alignItems:'flex-start',width:57,paddingLeft:10,}}>
 				 <TouchableOpacity  onPress={this._pressButton.bind(this)}>
 					  <View style={{justifyContent:'flex-start',flexDirection:'row',alignItems:'center',backgroundColor:'transparent'}}>
 							<Icon name="ios-arrow-back" color="#fff"size={24}  />
@@ -204,7 +205,7 @@ export default class Webviews extends Component {
 					  </View>
 				</TouchableOpacity>
 			 </View> : <View></View>}
-			 {this.state.isloading ? <View style={{justifyContent: 'center',alignItems: 'center',height:Dimensions.get('window').height-60,width:Dimensions.get('window').width,backgroundColor:'#fff',position:'absolute',top:20,left:0,}}>
+			 {this.state.isloading ? <View style={{justifyContent: 'center',alignItems: 'center',height:Dimensions.get('window').height-60,width:Dimensions.get('window').width,backgroundColor:'#fff',position:'absolute',top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,left:0,}}>
 				     <View style={{justifyContent:'center',position:'absolute',top:0,left:0,height:45,alignItems:'flex-start',width:Dimensions.get('window').width,paddingLeft:10,backgroundColor:'#4385f4'}}>
 				 <TouchableOpacity  onPress={this._pressButton.bind(this)}>
 					  <View style={{justifyContent:'flex-start',flexDirection:'row',alignItems:'center',backgroundColor:'transparent'}}>

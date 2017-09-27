@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-native-modalbox'
 import ShareExtension from 'react-native-share-extension'
-
+import DeviceInfo from 'react-native-device-info';
 import {
   Text,
   TextInput,

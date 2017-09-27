@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import PassState from './PassState';
 import Push from './Push';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Personal extends React.Component {

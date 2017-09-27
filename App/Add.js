@@ -21,6 +21,7 @@ import Picker from 'react-native-picker'
 import Token from './Token';
 import Netinfo from './Netinfo';
 import DateTimePicker from 'react-native-datetime';
+import DeviceInfo from 'react-native-device-info';
 var dataImpor = [];
 
 export default class Add extends Component {
@@ -485,7 +486,7 @@ onDateChange(date) {
 						/>
 						</View>
 					</View>
-           
+
 					<TouchableOpacity activeOpacity={0.8} onPress={this._tijiao.bind(this)}   style={{marginTop:30,backgroundColor:'#4385f4',marginLeft:20,marginRight:20,height:50,alignItems:'center',justifyContent:'center',borderRadius:5,}}>
 					     <Text style={{color:'#fff',fontSize:18,}}allowFontScaling={false}>提交</Text>
 					</TouchableOpacity>
@@ -608,8 +609,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

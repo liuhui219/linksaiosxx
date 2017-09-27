@@ -27,6 +27,7 @@ import Push from './Push';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 import Gonggaob from './Gonggaob';
 import Swipeable from 'react-native-swipeable';
 import Toast from '@remobile/react-native-toast';
@@ -1091,9 +1092,9 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
-	paddingTop:20,
+	paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	flexDirection:'row'
   },
   loading: {

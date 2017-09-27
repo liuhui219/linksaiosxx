@@ -22,6 +22,7 @@ import {
 } from 'react-native';
 import PassState from './PassState';
 import Toast from '@remobile/react-native-toast';
+import DeviceInfo from 'react-native-device-info';
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

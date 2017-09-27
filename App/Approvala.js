@@ -24,6 +24,7 @@ import Assetm from './Assetm';
 import Bxm from './Bxm';
 import qus from './qus';
 import Attendancem from './Attendancem';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 let array = [];
 let aa=[];
@@ -270,7 +271,7 @@ export default class Approvala extends React.Component {
 				progressBackgroundColor="#ffffff"
                 />
             }
-		  /> 
+		  />
       </View>
 		)
 

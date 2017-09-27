@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import PassState from './PassState';
 import Token from './Token';
+import DeviceInfo from 'react-native-device-info';
 export default class Netinfos extends React.Component {
 
     constructor(props) {
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   },
   card: {
     height:65,
-    paddingTop:20,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

@@ -21,6 +21,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import PassState from './PassState';
+import DeviceInfo from 'react-native-device-info';
 import Push from './Push';
 var RNControlFlashlight = NativeModules.RNControlFlashlight;
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -186,7 +187,7 @@ export default class Netinfo extends React.Component {
                 {this.state.viewAppear ? <Barcode style={{flex: 1, }}
                                                   ref={ component => this._barCode = component }
                                                   onBarCodeRead={this._onBarCodeRead}/> : null}
-                <View style={{flex:1,position:'absolute',top:0,left:0,height:65,paddingTop:20, flexDirection:'row',width:Dimensions.get('window').width,justifyContent:'space-between'}}>
+                <View style={{flex:1,position:'absolute',top:0,left:0,height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20, flexDirection:'row',width:Dimensions.get('window').width,justifyContent:'space-between'}}>
 
                     <View style={{justifyContent:'center',alignItems:'center',}}>
                        <TouchableOpacity onPress={this._pressButton.bind(this)}>
@@ -196,11 +197,11 @@ export default class Netinfo extends React.Component {
                          </View>
                        </TouchableOpacity>
                     </View>
-                    {this.state.light ? <TouchableOpacity activeOpacity={1} onPress={this.on.bind(this)} style={{justifyContent:'center',alignItems:'flex-end',paddingRight:0,position:'absolute',right:75,top:24}}>
+                    {this.state.light ? <TouchableOpacity activeOpacity={1} onPress={this.on.bind(this)} style={{justifyContent:'center',alignItems:'flex-end',paddingRight:0,position:'absolute',right:75,top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 24}}>
 	                    <View style={{justifyContent:'flex-end',alignItems:'flex-end',backgroundColor:'transparent'}}>
 	                         <Icon name="ios-flash-outline" color="#fff"size={36}  />
 	                    </View>
-                    </TouchableOpacity> : <TouchableOpacity activeOpacity={1} onPress={this.off.bind(this)} style={{justifyContent:'center',alignItems:'flex-end',paddingRight:0,position:'absolute',right:75,top:24}}>
+                    </TouchableOpacity> : <TouchableOpacity activeOpacity={1} onPress={this.off.bind(this)} style={{justifyContent:'center',alignItems:'flex-end',paddingRight:0,position:'absolute',right:75,top:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 24}}>
 	                    <View style={{justifyContent:'flex-end',alignItems:'flex-end',backgroundColor:'transparent'}}>
 	                         <Icon name="ios-flash-outline" color="#de9c0e"size={36}  />
 	                    </View>

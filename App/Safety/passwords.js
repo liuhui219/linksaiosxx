@@ -19,6 +19,7 @@ import {
   View
 } from 'react-native';
 import PassState from '../PassState';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 var number = '';
 var numbers = '';
@@ -171,7 +172,7 @@ export default class Password extends Component {
   render() {
     return (
       <View style={{flex:1,alignItems:'center',backgroundColor:'#5d9dd7',flexDirection:'column'}}>
-        <View style={{height:65,paddingTop:20,flexDirection:'row'}}>
+        <View style={{height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,flexDirection:'row'}}>
              <View style={{flex:1,justifyContent:'center'}}>
                   <TouchableOpacity onPress={this._pressButton.bind(this)}>
                      <View style={{justifyContent:'flex-start',flexDirection:'row',alignItems:'center',}}>

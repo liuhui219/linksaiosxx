@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
 	StyleSheet,
-    Navigator, 
+    Navigator,
 	TouchableOpacity,
 	TouchableHighlight,
 	Text,
@@ -15,25 +15,25 @@ import {
 	RefreshControl,
 	ListView,
 } from 'react-native';
- 
+import DeviceInfo from 'react-native-device-info'; 
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
 import YTjinfoa from './YTjinfoa';
 
-import Icon from 'react-native-vector-icons/Ionicons'; 
-import Gonggaob from './Gonggaob';        
- 
-var array = []; 
+import Icon from 'react-native-vector-icons/Ionicons';
+import Gonggaob from './Gonggaob';
+
+var array = [];
 export default class YTjinfo extends React.Component {
-    
+
     constructor(props) {
-        super(props); 
-		this.state = { 
+        super(props);
+		this.state = {
 		  dataSource: new ListView.DataSource({
 			rowHasChanged: (row1, row2) => row1 !== row2,
 		  }),
 		  id: '',
-		  uid:'',                       
+		  uid:'',
 		  datas:[],
 		  imgs:[],
 		  loaded: false,
@@ -46,43 +46,43 @@ export default class YTjinfo extends React.Component {
 		  datda:null,
 	  };
     }
- 
+
     componentDidMount() {
         //这里获取传递过来的参数: name
         this.setState({datda:data.data.domain})
-         
-		 array = [];                                                    
+
+		 array = [];
          aa=[];
 		this.timer = setTimeout(
-		() => {this.fetchData('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '&p='+this.state.p)}, 
+		() => {this.fetchData('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '&p='+this.state.p)},
 		 800
-		 );      	  
+		 );
     }
-    componentWillUnmount() {    
+    componentWillUnmount() {
 	     this.timer && clearTimeout(this.timer);
-    }                           
-	 
+    }
+
 	fetchData(url) {
 		var that=this;
 		fetch(url)
-		  .then((response) => response.json())   
+		  .then((response) => response.json())
 		  .then((responseData)=>{
 		  	        console.log(responseData)
-					 if(responseData.data.data != ''){ 
+					 if(responseData.data.data != ''){
 					   responseData.data.data.forEach((Data,i) => {
 						   key={i}
-						   
-						   
+
+
 						   array.push(Data);
-						   
-						      
+
+
 					   })
 					  }
 					  if(responseData.data.count <= 10){
 						   that.setState({
 							   isReach:true,
 							   isLoadMore:false,
-							  
+
 						   })
 					  }
 					  if(responseData.data.count == 0){
@@ -94,42 +94,42 @@ export default class YTjinfo extends React.Component {
 							   isNull:true,
 						   })
 					  }else if(array.length > responseData.data.count){
-						  
+
 						   that.setState({
 							   isReach:true,
 							   isLoadMore:false,
 							   isNull:false,
-							   
+
 						   })
 					   }else{
-						  
-						   that.setState({  
+
+						   that.setState({
 							   dataSource: that.state.dataSource.cloneWithRows(array),
 							   loaded: true,
-							   sx:false, 
+							   sx:false,
 							   isNull:false,
 						   })
-					   }			   
-					   console.log(responseData)				   
-					  
+					   }
+					   console.log(responseData)
+
 				})
 				.catch((error) => {
 					that.setState({
-						    
-						   loaded: true,  
+
+						   loaded: true,
 						   sx:true,
-						   isReach:true,                           
+						   isReach:true,
 						   dataSource: that.state.dataSource.cloneWithRows(['加载失败，请下拉刷新']),
-						    
+
 					   })
-					  
+
 				  });
     }
-	   
-	 
+
+
 	infos(data){
-		const { navigator } = this.props; 
-	     
+		const { navigator } = this.props;
+
         if(navigator) {
 			InteractionManager.runAfterInteractions(() => {
             this.props.navigator.push({
@@ -137,15 +137,15 @@ export default class YTjinfo extends React.Component {
                 component: YTjinfoa,
 				params: {
 					data: data,
-					imgs: {uri: this.state.datda.slice(0,-6)+data.img.slice(1)} 
-					 
+					imgs: {uri: this.state.datda.slice(0,-6)+data.img.slice(1)}
+
 				}
             })
 			})
         }
 	}
-	
-	
+
+
     render() {
           if(!this.state.loaded){
 		  return (
@@ -160,10 +160,10 @@ export default class YTjinfo extends React.Component {
 		return(
 		 <ListView
 			dataSource={this.state.dataSource}
-			renderRow={this.renderMovie.bind(this)}  
-            onEndReached={this._onEndReach.bind(this) } 
+			renderRow={this.renderMovie.bind(this)}
+            onEndReached={this._onEndReach.bind(this) }
 			onEndReachedThreshold={2}
-			renderFooter={this._renderFooter.bind(this)}			
+			renderFooter={this._renderFooter.bind(this)}
 			refreshControl={
               <RefreshControl
                 refreshing={this.state.isRefreshing}
@@ -172,13 +172,13 @@ export default class YTjinfo extends React.Component {
 				progressBackgroundColor="#ffffff"
                 />
             }
-		  />     
+		  />
 		)
-	    
+
     }
-	
-	_ggButton(id){    
-		const { navigator } = this.props; 
+
+	_ggButton(id){
+		const { navigator } = this.props;
         if(navigator) {
 			InteractionManager.runAfterInteractions(() => {
             this.props.navigator.push({
@@ -186,13 +186,13 @@ export default class YTjinfo extends React.Component {
                 component: Gonggaob,
 				params: {
 					id: id,
-					 
+
 				}
             })
 			})
-        } 
+        }
 	}
-	
+
 	 renderMovie(data,sectionID: number, rowID: number) {
 		if(this.state.sx){
 			return(
@@ -201,18 +201,18 @@ export default class YTjinfo extends React.Component {
 				    <Text style={{fontSize:16,}} allowFontScaling={false}>{data}</Text>
 				</View>
 			)
-		}	
+		}
         else if(this.state.isNull){
 			return (
 			    <View style={{justifyContent:'center',alignItems:'center',height:Dimensions.get('window').height-150,}}>
 				    <Icon name="ios-folder-outline" color="#ccc"size={70}  />
 				    <Text style={{fontSize:16,}} allowFontScaling={false}>{data}</Text>
 				</View>
-			)     
-		} 		
-		else{ 
+			)
+		}
+		else{
 			return (
-			   <View style={{paddingBottom:15, justifyContent:'center',alignItems:'center', backgroundColor:'#fff',borderBottomWidth:1, borderColor:'#eee'}}>                          
+			   <View style={{paddingBottom:15, justifyContent:'center',alignItems:'center', backgroundColor:'#fff',borderBottomWidth:1, borderColor:'#eee'}}>
 				  <TouchableOpacity activeOpacity={0.8} onPress={this.infos.bind(this,data)} style={{justifyContent:'center',alignItems:'center', }}>
 				   <View style={{flexDirection:'row',paddingTop:15,}}>
 					  <View style={{marginLeft:15,marginRight:15,width: 40, height: 40,borderRadius:20,backgroundColor:'#ccc',alignItems:'center', justifyContent:'center'}}>
@@ -222,21 +222,21 @@ export default class YTjinfo extends React.Component {
 					       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 						      <Text style={{fontSize:14,}} allowFontScaling={false}>{data.userid}</Text>
 							  <Text style={{color:'#999',paddingRight:15,fontSize:12}} allowFontScaling={false}>{data.time}</Text>
-						   </View>       
-						   <View style={{ borderRadius:3,marginTop:5,}}> 
-							  <Text style={{flexWrap:'wrap',marginTop:5, paddingRight:15,fontSize:14}} allowFontScaling={false}>{data.address}</Text>    
 						   </View>
-						   
+						   <View style={{ borderRadius:3,marginTop:5,}}>
+							  <Text style={{flexWrap:'wrap',marginTop:5, paddingRight:15,fontSize:14}} allowFontScaling={false}>{data.address}</Text>
+						   </View>
+
 					  </View>
 				   </View>
-				  </TouchableOpacity> 
+				  </TouchableOpacity>
 				</View>
-				)	
-        }			
+				)
+        }
 	  }
-	    
-	  
-	  _renderFooter() { 
+
+
+	  _renderFooter() {
 		 if(this.state.isLoadMore){
 			 return (
 				<View style={styles.footer}>
@@ -245,37 +245,37 @@ export default class YTjinfo extends React.Component {
 				</View>
 		  )
 		 }
-		  
-		 
+
+
 	  }
-	
+
 	  // 下拉刷新
 	  _onRefresh() {
 		 this.setState({
 			   isRefreshing:true,
-			   isReach:false,  
+			   isReach:false,
 			   isLoadMore:false,
-               p:1,			   
+               p:1,
 		  })
-		  var that=this 
-				fetch('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '') 
-						.then((response) => response.json())   
+		  var that=this
+				fetch('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '')
+						.then((response) => response.json())
 		                .then(function (result) {
-							  
+
 							  array=[];
 							  array.length = 0;
-							   
-							  if(result.data.data != ''){ 
+
+							  if(result.data.data != ''){
 							   result.data.data.forEach((Data,i) => {
-								   key={i} 
-								   array.push(Data);   
+								   key={i}
+								   array.push(Data);
 							   })
 							  }
 							      if(result.data.count <= 10){
 									   that.setState({
 										   isReach:true,
 										   isLoadMore:false,
-										   
+
 									   })
 								  }
 								  if(result.data.count == 0){
@@ -289,65 +289,65 @@ export default class YTjinfo extends React.Component {
 										   isNull:true,
 									   })
 								  }else if(array.length > result.data.count){
-						                
+
 									   that.setState({
 										   isReach:true,
 										   isLoadMore:false,
 										   isNull:false,
 									   })
 								   }else{
-									   that.setState({ 
-										  
+									   that.setState({
+
 										   dataSource: that.state.dataSource.cloneWithRows(array),
 										   loaded: true,
-										   sx:false, 
+										   sx:false,
 										   isRefreshing:false,
 										   isNull:false,
 									   })
-									  
-								   }			   
-							   console.log(result)			   
-							  
+
+								   }
+							   console.log(result)
+
 						})
 			            .catch((error) => {
 					that.setState({
-						    
-						   loaded: true,  
+
+						   loaded: true,
 						   sx:true,
-						   isReach:true,   
-                           isRefreshing:false,						   
+						   isReach:true,
+                           isRefreshing:false,
 						   dataSource: that.state.dataSource.cloneWithRows(['加载失败，请下拉刷新']),
-						    
+
 					   })
-					  
+
 				  });
 	  }
-	  
-	 _onEndReach() {  
-		    
+
+	 _onEndReach() {
+
 		  if(!this.state.isReach){
 			  this.setState({
 				  isLoadMore:true,
 				  p:this.state.p+1,
 			  })
 			 InteractionManager.runAfterInteractions(() => {
-				  this.fetchData('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '&p='+this.state.p);   
+				  this.fetchData('' + data.data.domain + '/index.php?app=Legwork&m=MLegwork&a=lists&sta=1&num=15&access_token=' + data.data.token + '&p='+this.state.p);
 			})
 		  }
-		  
-		  
+
+
 	  }
-	  
-	 
-	
+
+
+
 }
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   tabView: {
     flex: 1,
-    flexDirection: 'column', 
-	backgroundColor:'#fafafa', 
-  },   
-  card: { 
+    flexDirection: 'column',
+	backgroundColor:'#fafafa',
+  },
+  card: {
     height:45,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-       
+
     },
 
     loadingTitle: {
@@ -385,6 +385,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.55)',
     flex: 1,
     fontSize: 13,
-    
+
   },
 });

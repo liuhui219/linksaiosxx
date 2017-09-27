@@ -23,6 +23,7 @@ import Operationa from './Operationa';
 import Operationb from './Operationb';
 import Operationc from './Operationc';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 let array = []
 let aa=[];
 export default class News extends React.Component {
@@ -124,8 +125,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
 card: {
-        paddingTop:20,
-        height:65,
+        paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
+        height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
         backgroundColor:'#4385f4',
         flexDirection:'row'
     },

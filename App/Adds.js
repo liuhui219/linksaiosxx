@@ -20,6 +20,7 @@ import Picker from 'react-native-picker'
 import Token from './Token';
 import Netinfo from './Netinfo';
 import PassState from './PassState';
+import DeviceInfo from 'react-native-device-info';
 import DateTimePicker from 'react-native-datetime';
 var dataImpor = [];
 
@@ -624,8 +625,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

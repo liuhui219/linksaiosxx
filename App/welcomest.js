@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import PassState from './PassState';
 import Swiper from 'react-native-swiper';
+import DeviceInfo from 'react-native-device-info';
 import {Login,data} from './Login';
 import Splash from './Splash';
 const { width, height } = Dimensions.get('window')

@@ -24,6 +24,7 @@ import Approval from './Approval';
 import Operation from './Operation';
 import PassState from './PassState';
 import News from './News';
+import DeviceInfo from 'react-native-device-info';
 import Toast from '@remobile/react-native-toast';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
@@ -192,8 +193,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

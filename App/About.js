@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Push from './Push';
 import Token from './Token';
+import QRCode from 'react-native-qrcode';
 import PassState from './PassState';
 import DeviceInfo from 'react-native-device-info';
 export default class About extends React.Component {
@@ -20,7 +21,7 @@ export default class About extends React.Component {
         super(props);
 		this._pressButton = this._pressButton.bind(this);
         BackAndroid.addEventListener('hardwareBackPress', this._pressButton);
-        this.state = {id: '',uid:'',datas:{},img:''};
+        this.state = {id: '',uid:'',datas:{},img:'',text: 'https://itunes.apple.com/us/app/lin-sheng-guan-jia-linksame/id1191391421?mt=8',show:true,};
     }
 
     _pressButton() {
@@ -34,7 +35,33 @@ export default class About extends React.Component {
     }
     componentDidMount() {
 
+		this.timer = setTimeout(
+		  () => {
+		   this.Qrcode('http://www.linksame.com/phone/qrcode.php');
+	    },800);
     }
+
+
+
+	Qrcode(url){
+		fetch(url)
+		  .then((response) => response.json())
+		  .then((responseData) => {
+                this.setState({
+					text:responseData.code,
+					show:false,
+				})
+		  })
+		  .catch((error) => {
+             this.setState({
+				 show:false,
+			 })
+		  });
+	}
+
+  componentWillUnmount() {
+      this.timer && clearTimeout(this.timer);
+	}
 
 
 
@@ -68,12 +95,18 @@ export default class About extends React.Component {
 					 <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center',marginTop:15,}}>
 					     <Image source={require('./imgs/logo.png')} style={{width: 50, height: 50,}} />
 					     <View  style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:20,}}>
-                              <Text style={{fontSize:12}} allowFontScaling={false}>For iPhone V2.0.6</Text>
+                              <Text style={{fontSize:12}} allowFontScaling={false}>For iPhone V2.0.7</Text>
 					     </View>
 					 </View>
 
 					 <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center',marginTop:35,}}>
-					     <Image source={require('./imgs/link.png')} style={{width: 150, height: 150,}} />
+					     <View style={{width:160,height:160,justifyContent:'center',alignItems:'center'}}>
+							 <QRCode
+							  value={this.state.text}
+							  size={150}
+							  bgColor='#000'
+							  fgColor='white'/>
+						 </View>
 					     <View  style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:20,}}>
                               <Text style={{fontSize:12}} allowFontScaling={false}>扫描二维码，让你的朋友也可以下载iPhone客户端！</Text>
 					     </View>
@@ -97,8 +130,8 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
-    paddingTop:20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },

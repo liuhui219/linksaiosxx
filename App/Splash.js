@@ -12,6 +12,7 @@ import {
 import SplashScreen from 'react-native-splash-screen';
 import AppMain from './main';
 import {Login,data} from './Login';
+import DeviceInfo from 'react-native-device-info';
 import welcome from './welcome';
 import { RNSKBucket } from 'react-native-swiss-knife';
 var {height, width} = Dimensions.get('window');

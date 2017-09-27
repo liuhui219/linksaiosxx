@@ -21,6 +21,7 @@ import {
 import Push from './Push';
 import PassState from './PassState';
 import SelectPoeple from './SelectPoeple';
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 var dataImpor = [];
 export default class Productionm extends Component {
@@ -699,9 +700,9 @@ const styles = StyleSheet.create({
 	backgroundColor:'#fafafa',
   },
   card: {
-    height:65,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
-	paddingTop:20,
+	paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
 	flexDirection:'row'
   },
   default: {

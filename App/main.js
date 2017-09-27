@@ -46,6 +46,7 @@ import weather from './weather';
 import PassState from './PassState';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DeviceInfo from 'react-native-device-info';
 import {
   MapView,
   MapTypes,
@@ -712,7 +713,7 @@ _cancer(){
 			        </TabBarIOS.Item>
 			      </TabBarIOS>
 			      {this.state.isshow ? <Animated.View style={{opacity:this.state.opacitys,height:Dimensions.get('window').height,width:Dimensions.get('window').width,position:'absolute',top:0,left:0,backgroundColor:'rgb(230,230,230)'}}>
-                     <View style={{width:Dimensions.get('window').width,position:'absolute',bottom:0,left:0,height:50,alignItems:'center',justifyContent:'center'}}>
+                     <View style={{width:Dimensions.get('window').width,position:'absolute',bottom:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 33 : 0,left:0,height:50,alignItems:'center',justifyContent:'center'}}>
                      <TouchableHighlight onPress={this.oncancel.bind(this)} activeOpacity = {1} underlayColor='transparent' style={{height:50,alignItems:'center',justifyContent:'center',}}>
                           <Animated.Image source={require('./imgs/plus.png')} style={{width: 30, height: 30,transform: [{rotate: spins}]}} />
                      </TouchableHighlight>
@@ -969,8 +970,8 @@ const styles = StyleSheet.create({
   	left:Dimensions.get('window').width/4*3
   },
   card:{
-    paddingTop:20,
-    height:65,
+    paddingTop:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 30 : 20,
+    height:(DeviceInfo.getModel() == 'iphone X' || DeviceInfo.getModel() == 'Simulator') ? 75 : 65,
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },
