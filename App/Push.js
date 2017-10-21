@@ -24,6 +24,7 @@ import Approval from './Approval';
 import Operation from './Operation';
 import PassState from './PassState';
 import News from './News';
+import {Login} from './Login';
 import DeviceInfo from 'react-native-device-info';
 import Toast from '@remobile/react-native-toast';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
@@ -111,6 +112,23 @@ export default class Push extends React.Component {
 						 })
 					 }
 
+           if(data.msg.type == 'out'){
+             storage.clearMap();
+             storage.remove({
+               key: 'loginState'
+             });
+             storage.remove({
+               key: 'password'
+             });
+             storage.remove({
+               key: 'contact'
+             });
+						 navigator.resetTo({
+							name: 'Login',
+							component: Login
+						 })
+					 }
+
       }
 
       }
@@ -153,6 +171,23 @@ export default class Push extends React.Component {
 						 navigator.push({
 							name: 'News',
 							component: News
+						 })
+					 }
+
+           if(data.msg.type == 'out'){
+             storage.clearMap();
+             storage.remove({
+               key: 'loginState'
+             });
+             storage.remove({
+               key: 'password'
+             });
+             storage.remove({
+               key: 'contact'
+             });
+						 navigator.resetTo({
+							name: 'Login',
+							component: Login
 						 })
 					 }
       }

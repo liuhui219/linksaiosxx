@@ -68,7 +68,29 @@ export class Login extends Component {
      })
     }
   _registNotification(deviceToken){
+    alert(deviceToken)
     this.setState({deviceToken:deviceToken,})
+  }
+  componentWillUnmount(){
+    fetch('' + data.data.domain + '/index.php?app=Im&m=User&a=mobileInfo&access_token=' + data.data.token + '', {
+       method: 'POST',
+       headers: {
+       'Content-Type': 'application/x-www-form-urlencoded',
+       },
+       body: this.toQueryString({
+            'token': this.state.deviceToken,
+            'type': 1
+       })
+     })
+     .then(function (response) {
+       return response.json();
+     })
+     .then(function (result) {
+      console.log(result);
+     })
+     .catch((error) => {
+
+     });
   }
 	onNavigationStateChange(navState) {
     if(navState.url.indexOf("http://www.linksame.com/OAuth/MobilePcdGant")!=-1){
@@ -106,25 +128,7 @@ export class Login extends Component {
 				expires: 1000 * 3600 * 30 * 24
 			  });
 
-        fetch('' + data.data.domain + '/index.php?app=Im&m=User&a=mobileInfo&access_token=' + data.data.token + '', {
-           method: 'POST',
-           headers: {
-           'Content-Type': 'application/x-www-form-urlencoded',
-           },
-           body: this.toQueryString({
-                'token': this.state.deviceToken,
-                'type': 1
-           })
-         })
-         .then(function (response) {
-           return response.json();
-         })
-         .then(function (result) {
-          console.log(result);
-         })
-         .catch((error) => {
-
-         });
+       
 
          fetch('' + data.data.domain + '/index.php?app=Im&m=MobileApi&a=getInfo&access_token=' + data.data.token + '')
      		  .then((response) => response.json())

@@ -359,10 +359,10 @@ export default class Setting extends Component {
                  </TouchableHighlight>
             </View>
 
-            <View >
-                 <TouchableHighlight underlayColor="#aaa" onPress={()=>Linking.canOpenURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1191391421&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8').then(supported => {
+            {DeviceInfo.getSystemVersion().split('.')[0] >= 11 ? <View >
+                 <TouchableHighlight underlayColor="#aaa" onPress={()=>Linking.canOpenURL('itms-apps://itunes.apple.com/us/app/twitter/id1191391421?mt=8&action=write-review ').then(supported => {
            if (supported) {
-               Linking.openURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1191391421&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8');
+               Linking.openURL('itms-apps://itunes.apple.com/us/app/twitter/id1191391421?mt=8&action=write-review');
            } else {
               console.log('无法打开该URI: ' + this.props.url);
            }
@@ -382,7 +382,30 @@ export default class Setting extends Component {
                    </View>
                   </View>
                  </TouchableHighlight>
-            </View>
+            </View> : <View >
+                 <TouchableHighlight underlayColor="#aaa" onPress={()=>Linking.canOpenURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1191391421&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8').then(supported => {
+           if (supported) {
+               Linking.openURL('http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1191391421&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8');
+           } else {
+              console.log('无法打开该URI: ' + this.props.url);
+           }
+        })}>
+                  <View style={{flexDirection:'row',flex:1,backgroundColor:'#fff',alignItems:'center',paddingLeft:15}}>
+                    <View style={{backgroundColor:'rgba(49, 102, 181, 0.73)',width:36,height:36,borderRadius:18,justifyContent:'center',alignItems:'center'}}>
+                      <Image source={require('./imgs/set_pf.png')} style={{width:24,height:24,}} />
+                    </View>
+                   <View style={{flexDirection:'row',flex:1,height:60,justifyContent:'space-between',alignItems:'center',marginLeft:10,paddingRight:10,backgroundColor:'#fff',borderTopWidth:1,borderColor:'#ececec'}}>
+                    <View style={{flexDirection:'row',alignItems:'center',}}>
+
+                      <Text style={{marginLeft:10,fontSize:16,}}allowFontScaling={false}>给我评分{DeviceInfo.getSystemVersion()}</Text>
+                    </View>
+                    <View style={{alignItems:'center', justifyContent:'center'}}>
+                       <Image source={require('./imgs/right.png')}  style={{width:26,height:15,}}/>
+                    </View>
+                   </View>
+                  </View>
+                 </TouchableHighlight>
+            </View>}
 
 
 

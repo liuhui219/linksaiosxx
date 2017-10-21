@@ -6,6 +6,7 @@ import {
 	TouchableOpacity,
 	TouchableHighlight,
 	Text,
+  ActivityIndicator,
 	BackAndroid,
 	Image,
 	Dimensions,
@@ -117,6 +118,12 @@ export default class About extends React.Component {
                        <Text style={{fontSize:12,marginTop:5,}} allowFontScaling={false}>邻盛管家-linksame版权所有</Text>
 				 </View>
 			</View>
+      {this.state.show ? <View style={{justifyContent: 'center',alignItems: 'center',width:Dimensions.get('window').width, height:Dimensions.get('window').height-70,overflow:'hidden',position:'absolute',top:70,left:0, backgroundColor:'#fff'}}>
+						<View style={styles.loading}>
+							<ActivityIndicator color="white"/>
+							<Text allowFontScaling={false} adjustsFontSizeToFit={false} style={styles.loadingTitle}>加载中……</Text>
+						</View>
+			</View> : null}
       <Push navigator = {this.props.navigator} {...this.props}/>
       <PassState navigator = {this.props.navigator} {...this.props}/>
 	  </View>
@@ -135,6 +142,21 @@ const styles = StyleSheet.create({
 	backgroundColor:'#4385f4',
 	flexDirection:'row'
   },
+  loading: {
+        backgroundColor: 'gray',
+        height: 80,
+        width: 100,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+
+    loadingTitle: {
+        marginTop: 10,
+        fontSize: 14,
+        color: 'white'
+    },
   default: {
     height: 37,
     borderWidth: 0,

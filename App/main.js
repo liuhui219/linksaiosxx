@@ -145,6 +145,7 @@ export default class FacebookExample extends Component {
    centrifuge.subscribe("Index_"+data.data.cid, function(datas) {
      if(datas.data.user == data.data.uid){
        isstate = true;
+       if(datas.data.msg.hasOwnProperty('unreadData')){
        if(datas.data.msg.unreadData.hasOwnProperty('bgCount') && !datas.data.msg.unreadData.hasOwnProperty('ywCount') && !datas.data.msg.unreadData.hasOwnProperty('xxCount')){
            var all_totals = Number(datas.data.msg.unreadData.bgCount) + Number(that.state.NUMS) + Number(that.state.NUMS_B);
            if(all_totals>=100){
@@ -174,6 +175,7 @@ export default class FacebookExample extends Component {
             that.setState({badgeNum:all_totals,xxCount:datas.data.msg.unreadData.xxCount,ywCount:datas.data.msg.unreadData.ywCount,bgCount:datas.data.msg.unreadData.bgCount,});
           }
         }
+      }
 		   that.setState({Contents:datas.data.msg.content,});
      }
    });

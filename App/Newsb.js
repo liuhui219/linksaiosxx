@@ -21,6 +21,7 @@ import Toast from '@remobile/react-native-toast';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Newsc from './Newsc';
 var array = [];
 var aa=[];
 export default class Newsb extends React.Component {
@@ -156,7 +157,20 @@ export default class Newsb extends React.Component {
 	}
 
 
+  _InfoBut(data){
+    var { navigator } = this.props;
+    var _this=this;
+    if(navigator) {
+      navigator.push({
+                  name: 'Newsc',
+                  component: Newsc,
+          params: {
+            data: data,
 
+          }
+          })
+    }
+  }
 
 
     render() {
@@ -222,12 +236,17 @@ export default class Newsb extends React.Component {
 				  <View style={{marginLeft:15,marginRight:15,width: 40, height: 40,borderRadius:20,backgroundColor:'#1ADA9A',alignItems:'center', justifyContent:'center'}}>
 					   <Image source={this.state.imgs[rowID]} style={{width: 40, height: 40,borderRadius:20,}} />
 				  </View>
-				  <View style={{flex:1,flexDirection:'column',}}>
+          <View style={{flex:1,flexDirection:'column',}}>
 					   <Text style={{fontSize:16,}} allowFontScaling={false}>{data.from_name}</Text>
-					   <View style={{backgroundColor:'#fff', borderRadius:3,marginRight:15,marginTop:5,padding:15,}}>
-						  <Text style={{fontSize:16,color:'#4385f4'}} allowFontScaling={false}>{data.app_name}</Text>
-						  <Text style={{flexWrap:'wrap',marginTop:10,fontSize:16,lineHeight:20}} allowFontScaling={false}><HTMLView value={data.content} /></Text>
+					   <View style={{backgroundColor:'#fff', borderRadius:3,marginRight:15,marginTop:5,}}>
+						  <Text style={{fontSize:16,color:'#4385f4',paddingTop:15,paddingLeft:15, paddingRight:15,}} allowFontScaling={false}>{data.app_name}</Text>
+						  <Text style={{flexWrap:'wrap',marginTop:10,paddingLeft:15, paddingRight:15,fontSize:16,}} allowFontScaling={false}><HTMLView value={data.title} /></Text>
+						  <TouchableOpacity  activeOpacity={0.8}   onPress={this._InfoBut.bind(this,data)}  style={{flexDirection:'row',justifyContent:'space-between',borderTopWidth:1,borderColor:'#dcdcdc',paddingTop:10,paddingBottom:10,marginTop:10,alignItems:'center',paddingLeft:15, paddingRight:15,}}>
+							  <Text style={{fontSize:14}} allowFontScaling={false}>阅读全文</Text>
+							  <Icon name="ios-arrow-forward" color="#ccc"size={25}  />
+						  </TouchableOpacity>
 					   </View>
+
 				  </View>
 			   </View>
 			</View>

@@ -15,18 +15,18 @@ import {
 	RefreshControl,
 	ListView,
 } from 'react-native';
-import FenX from './Examine/FenX';
-import FenX1 from './Examine/FenX1';
-import FenX2 from './Examine/FenX2';
-import FenX3 from './Examine/FenX3';
-import FenX4 from './Examine/FenX4';
-import FenX5 from './Examine/FenX5';
-import FenX6 from './Examine/FenX6';
-import Jxs from './Examine/Jxs';
-import Jxs1 from './Examine/Jxs1';
-import Jxs2 from './Examine/Jxs2';
-import Jxs3 from './Examine/Jxs3';
-import Jxs4 from './Examine/Jxs4';
+import FenX from './Examines/FenX';
+import FenX1 from './Examines/FenX1';
+import FenX2 from './Examines/FenX2';
+import FenX3 from './Examines/FenX3';
+import FenX4 from './Examines/FenX4';
+import FenX5 from './Examines/FenX5';
+import FenX6 from './Examines/FenX6';
+import Jxs from './Examines/Jxs';
+import Jxs1 from './Examines/Jxs1';
+import Jxs2 from './Examines/Jxs2';
+import Jxs3 from './Examines/Jxs3';
+import Jxs4 from './Examines/Jxs4';
 import Toast from '@remobile/react-native-toast';
 import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import Token from './Token';
